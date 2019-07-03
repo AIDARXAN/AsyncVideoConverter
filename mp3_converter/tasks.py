@@ -10,7 +10,7 @@ app = Celery('tasks', broker=BROKER_URL)
 
 
 @shared_task
-def convert(url):
+def convert(mail, url):
     ydl_opts = {
         'format': 'bestaudio/best',
         'postprocessors': [{
@@ -21,22 +21,20 @@ def convert(url):
     }
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         meta = ydl.extract_info(url, download=False)
-    return meta['url']
+        send_to_mail.delay(mail, meta['url'])
 
 
 @shared_task
 def send_to_mail(mail, url):
-    result = send_mail(
+    send_mail(
         # Email subject
-        'Download link from Django server',
+        subject='Download link from Django server',
         # Email text
-        'Click on the link to download or listen to the video ' + url,
+        message='Click on the link to download or listen to the video ' + url,
         # from email account
-        'mainwinnertactics@gmail.com',
+        from_email='mainwinnertactics@gmail.com',
         # to email account
-        [mail],
+        recipient_list=[mail],
         # bool => true or false, false means raise some exception, if occure
         fail_silently=False,
         )
-
-    return HttpResponse('%s' % result)
