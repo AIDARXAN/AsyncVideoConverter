@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 
 from .secrets import *
-from django_smtp_ssl import *
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -31,9 +31,9 @@ DEBUG = SECRETS_DEBUG
 ALLOWED_HOSTS = []
 
 # Celery settings
-BROKER_URL = 'redis://localhost:6379/0'
-RESULT_BACKEND = 'redis://localhost:6379/0'
-CELERY_ACCEPT_CONTENT = ['json']
+BROKER_URL = 'redis://localhost:6379'
+RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 
@@ -41,10 +41,10 @@ CELERY_RESULT_SERIALIZER = 'json'
 
 EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 465
+EMAIL_PORT = 485
 EMAIL_HOST_USER = SECRETS_EMAIL
 EMAIL_HOST_PASSWORD = SECRETS_PASSWORD
-EMAIL_HOST_TLS = True
+EMAIL_HOST_SSL = True
 
 # Application definition
 
