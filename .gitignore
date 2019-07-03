@@ -1,0 +1,11 @@
+.idea
+.vscode
+
+async_mp3_email/
+
+__pycache__/
+migrations/
+
+db.sqlite3
+
+/AsyncVideoConverter/secrets.py

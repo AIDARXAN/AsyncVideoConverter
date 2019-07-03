@@ -1,0 +1,10 @@
+Django==2.2.2
+youtube-dl==2019.06.21
+pytz==2019.1
+sqlparse==0.3.0
+django-celery==3.2.2
+django-celery-email==2.0.0
+celery==4.3.0
+redis==3.2.1
+kombu==4.6.3
+django-smtp-ssl==1.0
