@@ -11,9 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-
-from .secrets import *
-
+from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,28 +21,37 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = SECRETS_SECRET_KEY
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = SECRETS_DEBUG
+DEBUG = config('DEBUG')
 
 ALLOWED_HOSTS = []
 
 # Celery settings
-BROKER_URL = 'redis://localhost:6379'
-RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asiz/Bishkek'
+CELERY_BROKER_URL = 'redis://localhost:6379'
+
+# Redis Brokek Settings
+REDIS_HOST = 'localhost'
+REDIS_PORT = '6379'
+BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600} 
+RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+
 
 # SMTP settings
 
-EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 485
-EMAIL_HOST_USER = SECRETS_EMAIL
-EMAIL_HOST_PASSWORD = SECRETS_PASSWORD
-EMAIL_HOST_SSL = True
+EMAIL_HOST_USER = config('EMAIL')
+EMAIL_HOST_PASSWORD = config('PASSWORD')
+EMAIL_HOST_TLS = True
 
 # Application definition
 
@@ -52,10 +59,12 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
+    # 'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mp3_converter.apps.Mp3ConverterConfig',
+    'django_celery_beat',
+    'django_celery_results',
+    'mp3_converter',
 ]
 
 MIDDLEWARE = [

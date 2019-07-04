@@ -19,7 +19,7 @@ def index(request):
             url = form.cleaned_data.get('url')
             email = form.cleaned_data.get('email')
             
-            title = convert.delay(email, url)
+            title = convert.delay(email, url, request.scheme, request.META['HTTP_HOST'])
 
             audio_file = AudioFile.objects.create(url=url, email=email, video_title=title)
             audio_file.save()
