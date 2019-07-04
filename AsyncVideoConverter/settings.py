@@ -33,7 +33,7 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'Asiz/Bishkek'
+CELERY_TIMEZONE = 'Asia/Bishkek'
 CELERY_BROKER_URL = 'redis://localhost:6379'
 
 # Redis Brokek Settings
@@ -48,9 +48,9 @@ RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 485
-EMAIL_HOST_USER = config('EMAIL')
-EMAIL_HOST_PASSWORD = config('PASSWORD')
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'battle.smtp@gmail.com'
+EMAIL_HOST_PASSWORD = 'battle12345'
 EMAIL_HOST_TLS = True
 
 # Application definition
