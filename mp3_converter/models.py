@@ -4,8 +4,7 @@ from django.utils.timezone import get_current_timezone
 
 
 class AudioFile(models.Model):
-    url = models.URLField(max_length=1000)
-    video_title = models.CharField(max_length=500, default="null")
+    url = models.URLField(max_length=200)
     email = models.EmailField(max_length=50, default="null")
     request_sent = models.DateTimeField(default=datetime.now(tz=get_current_timezone()))
 

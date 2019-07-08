@@ -11,8 +11,14 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-from decouple import config
+import environ
 
+env = environ.Env(
+    SECRET_KEY=(str, "123"),
+    DEBUG=(bool, False),
+    EMAIL=(str, 'your@email.com'),
+    PASSWORD=(str, 'your_password'),
+)
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -21,12 +27,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG')
+DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Celery settings
 CELERY_RESULT_BACKEND = 'redis://localhost:6379'
@@ -48,10 +54,10 @@ RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = env('EMAIL')
+EMAIL_HOST_PASSWORD = env('PASSWORD')
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'battle.smtp@gmail.com'
-EMAIL_HOST_PASSWORD = 'battle12345'
-EMAIL_HOST_TLS = True
+EMAIL_USE_TLS = True
 
 # Application definition
 
@@ -59,6 +65,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_celery_beat',

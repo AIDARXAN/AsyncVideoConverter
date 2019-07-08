@@ -4,7 +4,7 @@ import youtube_dl
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from celery import Celery, app
-from AsyncVideoConverter.settings import EMAIL_HOST_USER, BROKER_URL, EMAIL_HOST_PASSWORD
+from AsyncVideoConverter.settings import EMAIL_HOST_USER, BROKER_URL
 
 app = Celery('tasks', broker=BROKER_URL)
 
@@ -22,11 +22,10 @@ def convert(mail, url, protocol, host):
         }]
     }
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        extracted_information = ydl.extract_info(url, download=True)
-        audio_id = extracted_information['id']
-        dl_link = protocol + '://' + host + '/audio/' + audio_id + '.mp3'
-        send_to_mail.delay(mail, dl_link)
-        return extracted_information['title']
+        meta = ydl.extract_info(url, download=True)
+        audio_id = meta['id']
+        download_link = protocol + '://' + host + '/media/' + audio_id + '.mp3'
+        send_to_mail.delay(mail, download_link)
 
 
 @app.task
