@@ -3,13 +3,9 @@ from __future__ import unicode_literals
 from .forms import DownloadForm
 from .models import AudioFile
 from .tasks import convert
-from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.decorators.csrf import ensure_csrf_cookie
-from django.core.mail import send_mail
 
 
-@ensure_csrf_cookie
 def index(request):
     form = DownloadForm()
     if request.method == 'POST':

@@ -15,8 +15,9 @@ class Migration(migrations.Migration):
             name='AudioFile',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('audio_url', models.URLField(max_length=300)),
+                ('url', models.URLField(max_length=200)),
                 ('request_sent', models.DateTimeField(auto_now_add=True)),
+                ('email', models.EmailField(default='null', max_length=50)),
             ],
         ),
     ]

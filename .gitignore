@@ -2,10 +2,10 @@
 .vscode
 
 async_mp3_email/
+audio/
 
 __pycache__/
 
 
 db.sqlite3
-
 .env

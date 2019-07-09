@@ -6,4 +6,4 @@ class DownloadForm(forms.Form):
         regex=r'^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$',
         max_length=300,
         label="Video Url")
-    email = forms.EmailField(max_length=60, label="Your Email")
+    email = forms.EmailField(max_length=50, label="Your Email")

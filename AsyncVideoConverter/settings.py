@@ -16,8 +16,8 @@ import environ
 env = environ.Env(
     SECRET_KEY=(str, "123"),
     DEBUG=(bool, False),
-    EMAIL=(str, 'your@email.com'),
-    PASSWORD=(str, 'your_password'),
+    EMAIL=(str, 'battle.smtp@gmail.com'),
+    PASSWORD=(str, 'battle12345'),
 )
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
