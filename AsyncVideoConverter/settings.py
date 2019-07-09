@@ -42,7 +42,7 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Asia/Bishkek'
 CELERY_BROKER_URL = 'redis://localhost:6379'
 
-# Redis Brokek Settings
+# Redis Broker Settings
 REDIS_HOST = 'localhost'
 REDIS_PORT = '6379'
 BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'

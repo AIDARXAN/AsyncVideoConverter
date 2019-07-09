@@ -1,8 +1,7 @@
 import youtube_dl
 
 from django.core.mail import send_mail
-from celery import Celery, app
-# from AsyncVideoConverter.settings import EMAIL_HOST_USER, BROKER_URL
+from celery import Celery
 from django.conf import settings
 
 app = Celery('tasks', broker=settings.BROKER_URL)

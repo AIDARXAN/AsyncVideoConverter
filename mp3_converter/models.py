@@ -7,4 +7,4 @@ class AudioFile(models.Model):
     request_sent = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return "(%s)" % (self.url)
+        return "(%s)" % self.url
