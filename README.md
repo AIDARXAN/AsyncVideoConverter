@@ -9,7 +9,10 @@ If you want to check is redis-server working properly type command below
 
     redis-cli ping
     
-It must return 'PONG'
+It must return 
+
+    PONG
+
 
 To install all requirements which is needed to run project copy code bellow
 
