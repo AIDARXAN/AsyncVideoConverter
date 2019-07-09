@@ -1,3 +1,9 @@
+Video Converter
+===============
+
+Installation
+---------------
+
 In the terminal choose the direcory, then put code below to clone the project
     
     git clone https://github.com/AIDARXAN/mp3-video_converter
