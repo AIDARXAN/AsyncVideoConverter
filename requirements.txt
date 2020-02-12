@@ -1,4 +1,4 @@
-Django==2.2.2
+Django==2.2.10
 youtube-dl==2019.06.21
 django-celery==3.2.2
 django-celery-email==2.0.0
